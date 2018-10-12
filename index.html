@@ -1,17 +1,20 @@
 <script>
-  var params = {};
+var params = window
+    .location
+    .search
+    .replace('?','')
+    .split('&')
+    .reduce(
+        function(p,e){
+            var a = e.split('=');
+            p[ decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
+            return p;
+        },
+        {}
+    );
 
-if (window.location.href.match(/.*\?.*/)) {
-  for (var i = 0; i < tmp_params.length; i++) {
-    var _tmp = window.location.href.replace(/.*\?/,'')
-      .split('&')[i]
-      .split('=');
-
-    params[_tmp[0]] = _tmp[1];
-  }
-}
-
-alert(params.data);
+console.log( params['data']);
+// выведет в консоль значение  GET-параметра data
 </script>
 
 
